@@ -8,6 +8,8 @@ TagManager:
   - PressKey
   - About
   - Settings
+  - Dot
+  - Audio
   layers:
   - Default
   - TransparentFX

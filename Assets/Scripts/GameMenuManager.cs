@@ -5,16 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class GameMenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GridManager gm;
+    public AudioClip valvesfx;
+    private AudioSource audioSource;
+
     void Start()
     {
-        
+        DontDestroyOnLoad(transform.gameObject);
+        audioSource = GetComponent<AudioSource> ();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            audioSource.enabled = true;
+
+            if (!audioSource.isPlaying) {
+                audioSource.clip = valvesfx;
+                audioSource.Play ();
+            }
+        }
     }
 
     public void BackGame()
@@ -25,7 +37,13 @@ public class GameMenuManager : MonoBehaviour
 
     public void ResetGame()
     {
+        GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Dot");
+        foreach(GameObject obj in allObjects) 
+        {
+            Destroy(obj);
+        }
 
+        gm.newLine.positionCount = 0;
         Debug.Log("Reset Pressed");
     }
 
